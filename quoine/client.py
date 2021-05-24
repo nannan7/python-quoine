@@ -15,8 +15,7 @@ elif six.PY3:
 
 
 class Quoine(object):
-
-    API_URL = 'https://api.quoine.com'
+    API_URL = 'https://api.liquid.com'
     API_VERSION = '2'
     VENDOR_ID = None
     LANGUAGE = 'en'
