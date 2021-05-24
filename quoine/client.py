@@ -1326,6 +1326,69 @@ class Quoine(object):
 
         return self._get('accounts/main_asset', True)
 
+    # Fiat Deposits Endpoints
+
+    def get_transactions(self, currency, transaction_type=None):
+        """残高の推移履歴を確認できます。
+
+        https://document.liquid.com/rest-api-private/account-info#no-3
+
+        transaction_type について
+
+        funding : 入金額を取得します。
+
+        withdrawal : 出金額を取得します。
+
+        withdrawal_fee : 出金手数料を取得します。
+
+        cfd_fee : CFD取引のポジション管理料を取得します。
+
+        cfd_pnl : CFD取引のポジション損益を取得します。
+
+        :param currency: 取得したい通貨を下記形式で選択します。JPY, BTC, ETH, XRP, BCH, QASH
+        :type currency: string
+        :param transaction_type: 残高推移のタイプを指定します。
+        :type transaction_type: string
+
+        :returns: API response
+
+        :raises: QuoineResponseException, QuoineAPIException
+
+        .. code-block:: python
+
+            {
+                "models": [
+                    {
+                        "id": 1,
+                        "transaction_type": "funding",
+                        "from_fiat_account_id": null,
+                        "to_fiat_account_id": 4,
+                        "from_role": null,
+                        "to_role": null,
+                        "currency": "USD",
+                        "gross_amount": "0.00015",
+                        "net_amount": "0.00015",
+                        "fee": "0.0",
+                        "notes": "",
+                        "fx_rate": null,
+                        "loan": null,
+                        "created_at": 1581932354
+                    }
+                ],
+                "current_page": 1,
+                "total_pages": 1
+            }
+
+        """
+
+        data = {
+            'currency': currency
+        }
+        if transaction_type:
+            data['transaction_type'] = transaction_type
+
+        return self._get('transactions', True, data=data)
+
     # Assets Lending Endpoints
 
     def create_loan_bid(self, rate, quantity, currency):
