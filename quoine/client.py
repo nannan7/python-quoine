@@ -111,7 +111,7 @@ class Quoine(object):
 
         if kwargs['data'] and method == 'get':
             kwargs['params'] = kwargs['data']
-            del(kwargs['data'])
+            del (kwargs['data'])
 
         response = getattr(self.session, method)(uri, **kwargs)
         return self._handle_response(response)
@@ -741,7 +741,8 @@ class Quoine(object):
             order_type = self.ORDER_TYPE_MARKET_RANGE
         return self.create_order(order_type, product_id, self.SIDE_SELL, quantity, price_range=price_range)
 
-    def create_margin_order(self, order_type, product_id, side, quantity, price, leverage_level=2, price_range=None, funding_currency=None, order_direction=None):
+    def create_margin_order(self, order_type, product_id, side, quantity, price, leverage_level=2, price_range=None,
+                            funding_currency=None, order_direction=None):
         """Create a leveraged margin order of type limit, market, or market with range
 
         Only available on Quoinex
@@ -885,7 +886,8 @@ class Quoine(object):
 
         return self._get('orders/{}'.format(order_id), True)
 
-    def get_orders(self, funding_currency=None, product_id=None, status=None, with_details=False, limit=None, page=None):
+    def get_orders(self, funding_currency=None, product_id=None, status=None, with_details=False, limit=None,
+                   page=None):
         """Get a list of orders using filters with pagination
 
         https://developers.quoine.com/#get-orders
